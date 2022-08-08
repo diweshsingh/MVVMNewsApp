@@ -1,0 +1,120 @@
+package com.dk.mvvmnewsapp.ui
+
+import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.dk.mvvmnewsapp.R
+import com.dk.mvvmnewsapp.adapter.ArticlesAdapter
+import com.dk.mvvmnewsapp.databinding.FragmentArticleListBinding
+import com.dk.mvvmnewsapp.listener.OnArticleItemClick
+import com.dk.mvvmnewsapp.models.Article
+import com.dk.mvvmnewsapp.network.ResponseResult
+import com.dk.mvvmnewsapp.utils.AppLog
+import com.dk.mvvmnewsapp.utils.VerticalSpacingItemDecorator
+import com.dk.mvvmnewsapp.viewmodel.AllArticlesViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
+/**
+ * This fragment is responsible:
+ * 1. Call an API to fetch list of articles.
+ * 2. Managing the UI for showing the list of article.
+ */
+@AndroidEntryPoint
+class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
+
+    private lateinit var articlesAdapter: ArticlesAdapter
+
+    private var _binding: FragmentArticleListBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    private val articleViewModel: AllArticlesViewModel by viewModels()
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentArticleListBinding.inflate(inflater, container, false)
+        return binding.root
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Setting up the recycler view.
+        initRecycleView()
+        subscribeObserver()
+        callGetArticleAPI()
+
+    }
+
+
+    private fun initRecycleView() {
+        val personalProfileDataList: ArrayList<Article> = ArrayList()
+
+        val itemDecorator = VerticalSpacingItemDecorator(2)
+        binding.recycleViewOrder.addItemDecoration(itemDecorator)
+        binding.recycleViewOrder.setHasFixedSize(true)
+        articlesAdapter = ArticlesAdapter(personalProfileDataList, this)
+        binding.articlesAdapter = articlesAdapter
+    }
+
+    private fun subscribeObserver() {
+        articleViewModel.getArticleList().onResult { articleList ->
+            if (articleList.isNotEmpty()) {
+                articlesAdapter.updateData(articleList)
+            }
+        }
+
+
+    }
+
+
+    private fun callGetArticleAPI() {
+        binding.apply {
+            articleViewModel.getAllArticleFromAPI(articleCategory = "Tech")
+                .onResult { responseResult ->
+                    when (responseResult) {
+                        is ResponseResult.Success -> {
+                            progressView.root.visibility = View.GONE
+                            val allArticlesResponse = responseResult.result.data
+                            articleViewModel.setArticleList(allArticlesResponse!!.articles)
+                        }
+                        is ResponseResult.Loading -> {
+
+                            progressView.root.visibility = View.VISIBLE
+
+                        }
+                        is ResponseResult.Error -> {
+
+                        }
+
+                    }
+                }
+        }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    /**
+     * This method will be called whenever user will click on any article item/cell.
+     */
+    override fun onArticleItemClick(article: Article) {
+        val bundle = Bundle()
+        bundle.putString("articleUrl", article.articleUrl)
+        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
+
+    }
+}

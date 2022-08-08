@@ -1,0 +1,105 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.dk.mvvmnewsapp"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    kapt {
+        correctErrorTypes true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+
+    testImplementation "junit:junit:4.13.2$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$android_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+
+
+    // Material Design
+    implementation "com.google.android.material:material:$material_design_version"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_version"
+
+    //LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // Navigation UI
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
+
+    // Fragment
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    // Gson
+    implementation "com.google.code.gson:gson:$gson_version"
+
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // Ok Http
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+}

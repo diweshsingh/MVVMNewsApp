@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="article"
+            type="com.dk.mvvmnewsapp.models.Article" />
+    </data>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/imageview_articles_cover"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:scaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_toEndOf="@id/imageview_articles_cover"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_article_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{article.title}"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_article_author_and_publish_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{article.authorName}"
+                android:textColor="@color/secondary_text"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/textview_article_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{article.description}"
+                android:textColor="@color/secondary_text" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>
