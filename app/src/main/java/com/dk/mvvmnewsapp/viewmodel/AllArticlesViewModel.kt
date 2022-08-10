@@ -9,6 +9,7 @@ import com.dk.mvvmnewsapp.network.ResponseResult
 import com.dk.mvvmnewsapp.network.ResponseWrapper
 import com.dk.mvvmnewsapp.network.response.AllArticlesResponse
 import com.dk.mvvmnewsapp.repositories.ArticlesRemoteDataSource
+import com.dk.mvvmnewsapp.repositories.ArticlesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class AllArticlesViewModel @Inject constructor(
-    private val articlesRemoteDataSource: ArticlesRemoteDataSource
+    private val articlesRepository: ArticlesRepository
 ) : ViewModel() {
 
 
@@ -25,7 +26,7 @@ class AllArticlesViewModel @Inject constructor(
     private var articleList: MutableLiveData<ArrayList<Article>> = MutableLiveData()
 
     fun getAllArticleFromAPI(articleCategory: String): LiveData<ResponseResult<ResponseWrapper<AllArticlesResponse>>> {
-        return articlesRemoteDataSource.getAllArticles(articleCategory, viewModelScope)
+        return articlesRepository.getArticlesForCategory(articleCategory, viewModelScope)
     }
 
 
@@ -33,12 +34,12 @@ class AllArticlesViewModel @Inject constructor(
         return articleList
     }
 
-    fun setArticleList(articles: List<com.dk.mvvmnewsapp.network.response.Article>) {
+    fun createArticleList(articles: List<com.dk.mvvmnewsapp.network.response.Article>) {
 
-        val allArticleList:ArrayList<Article> = ArrayList()
+        val allArticleList: ArrayList<Article> = ArrayList()
         for (articleItem in articles) {
 
-            val author:String = articleItem.author ?: ""
+            val author: String = articleItem.author ?: ""
 
             val article = Article(
                 imageUrl = articleItem.urlToImage,

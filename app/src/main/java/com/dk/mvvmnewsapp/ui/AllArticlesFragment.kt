@@ -1,8 +1,6 @@
 package com.dk.mvvmnewsapp.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,6 @@ import com.dk.mvvmnewsapp.databinding.FragmentArticleListBinding
 import com.dk.mvvmnewsapp.listener.OnArticleItemClick
 import com.dk.mvvmnewsapp.models.Article
 import com.dk.mvvmnewsapp.network.ResponseResult
-import com.dk.mvvmnewsapp.utils.AppLog
 import com.dk.mvvmnewsapp.utils.VerticalSpacingItemDecorator
 import com.dk.mvvmnewsapp.viewmodel.AllArticlesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,7 +83,7 @@ class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
                         is ResponseResult.Success -> {
                             progressView.root.visibility = View.GONE
                             val allArticlesResponse = responseResult.result.data
-                            articleViewModel.setArticleList(allArticlesResponse!!.articles)
+                            articleViewModel.createArticleList(allArticlesResponse!!.articles)
                         }
                         is ResponseResult.Loading -> {
 

@@ -1,6 +1,8 @@
 package com.dk.mvvmnewsapp.network
 
 import com.dk.mvvmnewsapp.BuildConfig
+import com.dk.mvvmnewsapp.repositories.ArticlesRemoteDataSource
+import com.dk.mvvmnewsapp.repositories.ArticlesRepository
 import com.dk.mvvmnewsapp.utils.NetworkConstant
 import dagger.Module
 import dagger.Provides
@@ -74,6 +76,11 @@ class NetworkModule {
     }
 
 
+    @Singleton
+    @Provides
+    fun provideDefaultArticleRepository(
+        api: ApiService
+    ) = ArticlesRemoteDataSource(api) as ArticlesRepository
 
 
 }

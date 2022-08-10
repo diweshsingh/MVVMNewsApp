@@ -10,10 +10,9 @@ import javax.inject.Inject
  * Created by Diwesh Singh on 28/07/22.
  */
 class ArticlesRemoteDataSource @Inject constructor(private val apiService: ApiService) :
-    BaseDataSource() {
+    BaseDataSource(), ArticlesRepository {
 
-
-    fun getAllArticles(
+    override fun getArticlesForCategory(
         articleCategory: String,
         viewModelScope: CoroutineScope
     ): LiveData<ResponseResult<ResponseWrapper<AllArticlesResponse>>> =
