@@ -1,4 +1,4 @@
-# Android-Architecture-Components-MVVM
+# News APP - MVVM
 This repository contains Android Architecture Components (Navigation Graph, LiveData ,View Model and MVVM with retrofit for consuming rest api )
 
 ## About This Project
