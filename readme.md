@@ -21,7 +21,6 @@ We have also added the Unit test in the project.
 * [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [Retrofit](https://square.github.io/retrofit/)
 * [News Api](https://newsapi.org/)
-* [Glide](https://github.com/bumptech/glide)
 * [Recyclerview](https://developer.android.com/guide/topics/ui/layout/recyclerview)
 * [Junit](https://junit.org/junit4/)
 * [Glide](https://github.com/bumptech/glide)
