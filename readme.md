@@ -11,9 +11,8 @@ We have also added the Unit test in the project.
 * On the click of article user can read the article in in-app webview.
 
 ## App demo ref. 
-![WhatsApp Image 2022-08-11 at 12 40 10 AM](https://user-images.githubusercontent.com/2659353/184003160-5801925f-62b2-469b-8c39-745c8f1e07f5.jpeg)![[WhatsApp Image 2022-08-11 at 12 40 11 AM](https://user-images.githubusercontent.com/2659353/184003219-905be803-21a8-41b3-bbd6-c955f5a64e20.jpeg)WhatsApp Image 2022-08-11 at 12 40 11 AM (1)](https://user-images.githubusercontent.com/2659353/184003202-20271149-a4d1-4c3f-8ce1-0ced28c71010.jpeg)
-![WhatsApp Image 2022-08-11 at 12 40 09 AM (1)](https://user-images.githubusercontent.com/2659353/184003237-6e606745-1950-4fd7-b413-774bd23f6b3a.jpeg)
-![WhatsApp Image 2022-08-11 at 12 40 09 AM](https://user-images.githubusercontent.com/2659353/184003241-9e500d5e-6d02-4bca-8d80-5c4b6874d230.jpeg)
+![Group 1](https://user-images.githubusercontent.com/2659353/184004132-33a4594b-2a8b-4427-9e2f-2ccfb2c836c3.png)
+
 
 ## Component Used
 * [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/)
