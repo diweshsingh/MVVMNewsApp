@@ -12,4 +12,9 @@
 
     <!-- String used for passing the default values in bundle-->
     <string name="invalid_url">Invalid URL</string>
+
+    <string name="network_error_dialog_title">An error occurred</string>
+    <string name="network_error_dialog_message">Bad internet connection. Please try again later.</string>
+    <string name="network_error_dialog_positive_cta">Retry</string>
+    <string name="network_error_dialog_negative_cta">Close App</string>
 </resources>

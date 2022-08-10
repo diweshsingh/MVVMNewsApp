@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.dk.mvvmnewsapp.R
@@ -12,7 +13,9 @@ import com.dk.mvvmnewsapp.databinding.FragmentArticleListBinding
 import com.dk.mvvmnewsapp.listener.OnArticleItemClick
 import com.dk.mvvmnewsapp.models.Article
 import com.dk.mvvmnewsapp.network.ResponseResult
+import com.dk.mvvmnewsapp.utils.ActionableButton
 import com.dk.mvvmnewsapp.utils.VerticalSpacingItemDecorator
+import com.dk.mvvmnewsapp.utils.showSimpleDialog
 import com.dk.mvvmnewsapp.viewmodel.AllArticlesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -100,7 +103,17 @@ class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
 
                         }
                         is ResponseResult.Error -> {
-
+                            progressView.root.isVisible = false
+                            showSimpleDialog(
+                                title = getString(R.string.network_error_dialog_title),
+                                message = getString(R.string.network_error_dialog_message),
+                                positiveButton = ActionableButton(getString(R.string.network_error_dialog_positive_cta)) {
+                                    callGetArticleAPI()
+                                },
+                                negativeButton = ActionableButton(getString(R.string.network_error_dialog_negative_cta)) {
+                                    activity?.onBackPressed()
+                                },
+                            )
                         }
 
                     }
