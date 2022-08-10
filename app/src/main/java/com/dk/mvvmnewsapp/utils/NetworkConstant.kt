@@ -5,8 +5,6 @@ package com.dk.mvvmnewsapp.utils
  */
 object NetworkConstant {
 
-    //API KEY
-    const val API_KEY = "cdf6ebd429284765a5b9e851366895c9"
 
     //BASE URL
     const val BASE_URL = "https://newsapi.org/"

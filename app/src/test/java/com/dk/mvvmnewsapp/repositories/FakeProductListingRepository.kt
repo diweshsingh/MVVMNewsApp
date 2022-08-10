@@ -22,15 +22,28 @@ class FakeAllArticlesRepository : ArticlesRepository {
         viewModelScope: CoroutineScope
     ): LiveData<ResponseResult<ResponseWrapper<AllArticlesResponse>>> {
 
-//        return if(shouldReturnNetworkError) {
-//            ResultWrapper.GenericError(503, null)
-//        } else {
-//            ResultWrapper.Success(ProductListResponse(emptyList()))
+        return if (shouldReturnNetworkError) {
+            MutableLiveData(
+                ResponseResult.Error(
+                    ResponseWrapper(
+                        null, "Check your internet connection & Please try again."
+                    )
+                )
+            )
+        } else {
+            MutableLiveData(
+                ResponseResult.Success(
+                    ResponseWrapper(
+                        AllArticlesResponse(
+                            articles = emptyList(),
+                            status = "Success",
+                            totalResults = 0
+                        ), null
+                    )
+                )
+            )
 
-        val result: LiveData<ResponseResult<ResponseWrapper<AllArticlesResponse>>> =
-            MutableLiveData()
-        return result
-//        }
+        }
     }
 
 }

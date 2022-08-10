@@ -48,12 +48,16 @@ class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
         super.onViewCreated(view, savedInstanceState)
         // Setting up the recycler view.
         initRecycleView()
+        // Subscribe the req. observers
         subscribeObserver()
+        // Calling the API
         callGetArticleAPI()
 
     }
 
-
+    /**
+     * Setting up the recycleView
+     */
     private fun initRecycleView() {
         val personalProfileDataList: ArrayList<Article> = ArrayList()
 
@@ -64,8 +68,11 @@ class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
         binding.articlesAdapter = articlesAdapter
     }
 
+    /**
+     * Subscribing to all the required livedata
+     */
     private fun subscribeObserver() {
-        articleViewModel.getArticleList().onResult { articleList ->
+        articleViewModel.articleList.onResult { articleList ->
             if (articleList.isNotEmpty()) {
                 articlesAdapter.updateData(articleList)
             }
@@ -74,10 +81,12 @@ class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
 
     }
 
-
+    /**
+     * Calling the API to get the Articles
+     */
     private fun callGetArticleAPI() {
         binding.apply {
-            articleViewModel.getAllArticleFromAPI(articleCategory = "Tech")
+            articleViewModel.getArticlesForCategoryFromAPI(articleCategory = "Tech")
                 .onResult { responseResult ->
                     when (responseResult) {
                         is ResponseResult.Success -> {

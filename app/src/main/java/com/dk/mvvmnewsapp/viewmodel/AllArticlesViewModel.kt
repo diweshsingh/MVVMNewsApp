@@ -8,7 +8,6 @@ import com.dk.mvvmnewsapp.models.Article
 import com.dk.mvvmnewsapp.network.ResponseResult
 import com.dk.mvvmnewsapp.network.ResponseWrapper
 import com.dk.mvvmnewsapp.network.response.AllArticlesResponse
-import com.dk.mvvmnewsapp.repositories.ArticlesRemoteDataSource
 import com.dk.mvvmnewsapp.repositories.ArticlesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -23,16 +22,16 @@ class AllArticlesViewModel @Inject constructor(
 
 
     // Reference variable for personal profile list
-    private var articleList: MutableLiveData<ArrayList<Article>> = MutableLiveData()
+    private var _articleList: MutableLiveData<ArrayList<Article>> = MutableLiveData()
+    var articleList: LiveData<ArrayList<Article>> = _articleList
 
-    fun getAllArticleFromAPI(articleCategory: String): LiveData<ResponseResult<ResponseWrapper<AllArticlesResponse>>> {
+    /**
+     * Method to get data from repository
+     */
+    fun getArticlesForCategoryFromAPI(articleCategory: String): LiveData<ResponseResult<ResponseWrapper<AllArticlesResponse>>> {
         return articlesRepository.getArticlesForCategory(articleCategory, viewModelScope)
     }
 
-
-    fun getArticleList(): MutableLiveData<ArrayList<Article>> {
-        return articleList
-    }
 
     fun createArticleList(articles: List<com.dk.mvvmnewsapp.network.response.Article>) {
 
@@ -40,7 +39,6 @@ class AllArticlesViewModel @Inject constructor(
         for (articleItem in articles) {
 
             val author: String = articleItem.author ?: ""
-
             val article = Article(
                 imageUrl = articleItem.urlToImage,
                 title = articleItem.title,
@@ -52,7 +50,7 @@ class AllArticlesViewModel @Inject constructor(
             allArticleList.add(article)
         }
 
-        articleList.value = allArticleList
+        _articleList.value = allArticleList
     }
 
 }

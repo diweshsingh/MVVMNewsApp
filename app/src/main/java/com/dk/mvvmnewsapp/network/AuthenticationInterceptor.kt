@@ -1,6 +1,6 @@
 package com.dk.mvvmnewsapp.network
 
-import com.dk.mvvmnewsapp.utils.NetworkConstant
+import com.dk.mvvmnewsapp.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -13,7 +13,7 @@ class AuthenticationInterceptor : Interceptor {
 
         val request = original.newBuilder()
             .header("Accept", "application/json")
-            .header("Authorization", "Bearer " + NetworkConstant.API_KEY)
+            .header("Authorization", "Bearer " + BuildConfig.API_KEY)
             .header("Content-Type", "application/json")
             .method(original.method, original.body)
             .build()
