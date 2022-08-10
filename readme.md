@@ -26,4 +26,6 @@ We have also added the Unit test in the project.
 * [Glide](https://github.com/bumptech/glide)
 * [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 * [Gson](https://github.com/google/gson)
+* [HIlt](https://dagger.dev/hilt/)
+
 
