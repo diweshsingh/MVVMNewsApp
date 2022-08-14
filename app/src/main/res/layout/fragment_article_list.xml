@@ -25,7 +25,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView_order"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_0dp"
+            android:layout_height="match_parent"
             android:adapter="@{articlesAdapter}"
             android:background="@color/divider_color"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

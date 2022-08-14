@@ -12,6 +12,7 @@ import com.dk.mvvmnewsapp.databinding.FragmentArticleListBinding
 import com.dk.mvvmnewsapp.listener.OnArticleItemClick
 import com.dk.mvvmnewsapp.models.Article
 import com.dk.mvvmnewsapp.network.ResponseResult
+import com.dk.mvvmnewsapp.utils.EspressoIdlingResource
 import com.dk.mvvmnewsapp.utils.VerticalSpacingItemDecorator
 import com.dk.mvvmnewsapp.viewmodel.AllArticlesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +33,16 @@ class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val articleViewModel: AllArticlesViewModel by viewModels()
+    lateinit var  articleViewModel: AllArticlesViewModel
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val viewModel: AllArticlesViewModel by viewModels()
+        this.articleViewModel = viewModel
+
+    }
 
 
     override fun onCreateView(
@@ -74,6 +84,7 @@ class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
     private fun subscribeObserver() {
         articleViewModel.articleList.onResult { articleList ->
             if (articleList.isNotEmpty()) {
+
                 articlesAdapter.updateData(articleList)
             }
         }
@@ -90,12 +101,13 @@ class AllArticlesFragment : BaseFragment(), OnArticleItemClick {
                 .onResult { responseResult ->
                     when (responseResult) {
                         is ResponseResult.Success -> {
-                            progressView.root.visibility = View.GONE
+                            binding.progressView.root.visibility = View.GONE
+                            EspressoIdlingResource.decrement()
                             val allArticlesResponse = responseResult.result.data
                             articleViewModel.createArticleList(allArticlesResponse!!.articles)
                         }
                         is ResponseResult.Loading -> {
-
+                            EspressoIdlingResource.increment()
                             progressView.root.visibility = View.VISIBLE
 
                         }
