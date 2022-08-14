@@ -1,4 +1,4 @@
-# Android-Architecture-Components-MVVM
+# News APP - MVVM
 This repository contains Android Architecture Components (Navigation Graph, LiveData ,View Model and MVVM with retrofit for consuming rest api )
 
 ## About This Project
@@ -11,7 +11,8 @@ We have also added the Unit test in the project.
 * On the click of article user can read the article in in-app webview.
 
 ## App demo ref. 
-<img src="images/app_demo.png">
+![Group 1](https://user-images.githubusercontent.com/2659353/184004132-33a4594b-2a8b-4427-9e2f-2ccfb2c836c3.png)
+
 
 ## Component Used
 * [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/)
@@ -20,10 +21,11 @@ We have also added the Unit test in the project.
 * [View Model](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [Retrofit](https://square.github.io/retrofit/)
 * [News Api](https://newsapi.org/)
-* [Glide](https://github.com/bumptech/glide)
 * [Recyclerview](https://developer.android.com/guide/topics/ui/layout/recyclerview)
 * [Junit](https://junit.org/junit4/)
 * [Glide](https://github.com/bumptech/glide)
 * [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 * [Gson](https://github.com/google/gson)
+* [HIlt](https://dagger.dev/hilt/)
+
 
